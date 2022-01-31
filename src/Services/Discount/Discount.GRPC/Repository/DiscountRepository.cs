@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using Discount.GRPC.DbContexts;
+﻿using Discount.GRPC.DbContexts;
 using Discount.GRPC.Models;
-using Discount.GRPC.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,17 +10,14 @@ namespace Discount.GRPC.Repository
     public class DiscountRepository : IDiscountRepository
     {
         private readonly ApplicationDbContext _db;
-        private IMapper _mapper;
 
-        public DiscountRepository(ApplicationDbContext db, IMapper mapper)
+        public DiscountRepository(ApplicationDbContext db)
         {
             _db = db;
-            _mapper = mapper;
         }
 
-        public async Task<CouponDto> CreateUpdateCoupon(CouponDto couponDto)
+        public async Task<Coupon> CreateUpdateCoupon(Coupon coupon)
         {
-            var coupon = _mapper.Map<Coupon>(couponDto);
             if (coupon.Id > 0)
             {
                 _db.Coupons.Update(coupon);
@@ -33,7 +27,7 @@ namespace Discount.GRPC.Repository
                 _db.Coupons.Add(coupon);
             }
             await _db.SaveChangesAsync();
-            return _mapper.Map<CouponDto>(coupon);
+            return coupon;
         }
 
         public async Task<bool> DeleteCoupon(int couponId)
@@ -55,10 +49,10 @@ namespace Discount.GRPC.Repository
             }
         }
 
-        public async Task<CouponDto> GetCouponByName(string productName)
+        public async Task<Coupon> GetCouponByName(string productName)
         {
             var coupon = await _db.Coupons.Where(x => x.ProductName == productName).FirstOrDefaultAsync();
-            return _mapper.Map<CouponDto>(coupon);
+            return coupon;
         }
     }
 }
