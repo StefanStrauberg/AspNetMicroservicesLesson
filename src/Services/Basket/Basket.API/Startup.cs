@@ -25,14 +25,14 @@ namespace Basket.API
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("Redis");
-                options.InstanceName = "BasketDb_"; 
+                options.InstanceName = "BasketDb"; 
             });
 
             services.AddScoped<IBasketRepository, BasketRepository>();
 
             services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(options => options.Address = new Uri(Configuration["GrpcSettings:DiscountUrl"]));
             services.AddScoped<DiscountGrpcService>();
-
+            
             services.AddControllers();
 
             services.AddSwaggerGen(c =>

@@ -15,10 +15,14 @@ namespace Catalog.API.Repository
             _db = db;
         }
 
-        public async Task<bool> CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
             await _db.Products.InsertOneAsync(product);
-            return (!String.IsNullOrEmpty(product.Id));
+            if (!String.IsNullOrEmpty(product.Id))
+            {
+                return product;
+            }
+            return null;
         }
 
         public async Task<bool> DeleteProductById(string productId)

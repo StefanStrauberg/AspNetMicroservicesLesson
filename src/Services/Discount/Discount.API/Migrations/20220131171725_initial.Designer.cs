@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Discount.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220131084552_initial")]
+    [Migration("20220131171725_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

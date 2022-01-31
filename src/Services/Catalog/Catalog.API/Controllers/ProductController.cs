@@ -95,8 +95,8 @@ namespace Catalog.API.Controllers
         {
             try
             {
-                var isSuccess = await _repository.CreateProduct(product);
-                _response.Result = true;
+                var model = await _repository.CreateProduct(product);
+                _response.Result = model;
             }
             catch (Exception ex)
             {

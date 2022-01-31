@@ -24,4 +24,8 @@
     <Protobuf Include="Protos\discount.proto" GrpcServices="Server" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Dto\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Discount.GRPC.Models;
-using Discount.GRPC.Models.Dto;
 using Discount.GRPC.Protos;
 
 namespace Discount.GRPC
