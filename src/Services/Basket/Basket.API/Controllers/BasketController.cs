@@ -57,8 +57,8 @@ namespace Basket.API.Controllers
         {
             try
             {
-                await _repository.DeleteBasket(userName);
-                _response .IsSuccess = true;
+                var isSuccess = await _repository.DeleteBasket(userName);
+                _response.IsSuccess = isSuccess;
             }
             catch (Exception ex)
             {

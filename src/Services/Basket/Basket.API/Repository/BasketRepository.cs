@@ -1,6 +1,8 @@
 ﻿using Basket.API.Models;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using StackExchange.Redis;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Basket.API.Repository
@@ -12,9 +14,16 @@ namespace Basket.API.Repository
         {
             _redisCache = redisCache;
         }
-        public async Task DeleteBasket(string userName)
+
+        public async Task<bool> DeleteBasket(string userName)
         {
-            await _redisCache.RemoveAsync(userName);
+            ShoppingCart cart = await GetBasket(userName);
+            if (cart != null)
+            {
+                await _redisCache.RemoveAsync(userName);
+                return true;
+            }
+            return false;
         }
 
         public async Task<ShoppingCart> GetBasket(string userName)

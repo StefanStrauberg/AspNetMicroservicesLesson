@@ -1,4 +1,5 @@
 ﻿using Basket.API.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Basket.API.Repository
@@ -7,6 +8,6 @@ namespace Basket.API.Repository
     {
         Task<ShoppingCart> GetBasket(string userName);
         Task<ShoppingCart> UpdateBasket(ShoppingCart basket);
-        Task DeleteBasket(string userName);
+        Task<bool> DeleteBasket(string userName);
     }
 }
