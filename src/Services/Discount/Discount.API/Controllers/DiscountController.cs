@@ -23,23 +23,6 @@ namespace Discount.API.Controllers
         }
 
         [HttpGet]
-        public async Task<object> Get()
-        {
-            try
-            {
-                IEnumerable<CouponDto> couponDtos = await _discountRepository.GetCoupons();
-                _response.Result = couponDtos;
-            }
-            catch (Exception ex)
-            {
-                _response.IsSuccess = false;
-                _response.ErrorMessages
-                     = new List<string>() { ex.ToString() };
-            }
-            return _response;
-        }
-
-        [HttpGet]
         [Route("{ProductName}")]
         public async Task<object> Get(string ProductName)
         {

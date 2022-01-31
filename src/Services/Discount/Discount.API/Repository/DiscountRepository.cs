@@ -60,11 +60,5 @@ namespace Discount.API.Repository
             var coupon = await _db.Coupons.Where(x => x.ProductName == productName).FirstOrDefaultAsync();
             return _mapper.Map<CouponDto>(coupon);
         }
-
-        public async Task<IEnumerable<CouponDto>> GetCoupons()
-        {
-            List<Coupon> couponList = await _db.Coupons.ToListAsync();
-            return _mapper.Map<List<CouponDto>>(couponList);
-        }
     }
 }
