@@ -12,11 +12,9 @@ namespace Ordering.Application.Features.Orders.Commands.DeleteOrder
     {
         private readonly IOrderRepository _orderRepository;
         private readonly ILogger<DeleteOrderCommandHandler> _logger;
-        private readonly IMapper _mapper;
-        public DeleteOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<DeleteOrderCommandHandler> logger)
+        public DeleteOrderCommandHandler(IOrderRepository orderRepository, ILogger<DeleteOrderCommandHandler> logger)
         {
             _orderRepository = orderRepository;
-            _mapper = mapper;
             _logger = logger;
         }
         public async Task<Unit> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
