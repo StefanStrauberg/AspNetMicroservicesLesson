@@ -25,17 +25,14 @@ namespace Ordering.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<OrdersVm>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<OrdersVm>>> GetOrdersByUserName(string userName)
         {
-            var query = new GetOrdersListQuery(userName);
-            var orders = await _mediator.Send(query);
-            return Ok(orders);
+            return Ok(await _mediator.Send(new GetOrdersListQuery(userName)));
         }
 
         [HttpPost(Name = "CheckoutOrder")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<int>> CheckoutOrder([FromBody] CheckoutOrderCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpPut(Name = "UpdateOrder")]
@@ -44,8 +41,7 @@ namespace Ordering.API.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> UpdateOrder([FromBody] UpdateOrderCommand command)
         {
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            return Ok(await _mediator.Send(command));
         }
 
         [HttpDelete("{id}", Name = "DeleteOrder")]
@@ -54,8 +50,7 @@ namespace Ordering.API.Controllers
         [ProducesDefaultResponseType]
         public async Task<ActionResult> DeleteOrder(int id)
         {
-            var command = new DeleteOrderCommand() { Id = id };
-            await _mediator.Send(command);
+            await _mediator.Send(new DeleteOrderCommand() { Id = id });
             return NoContent();
         }
     }
