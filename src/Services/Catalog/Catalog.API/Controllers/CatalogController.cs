@@ -24,8 +24,7 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> Get()
         {
-            var result = await _repository.GetAll();
-            return Ok(result);
+            return Ok(await _repository.GetAll());
         }
 
         [HttpGet("{id:length(24)}", Name = "GetById")]
@@ -47,8 +46,7 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> GetByCategory(string name)
         {
-            var result = await _repository.GetByCategory(name);
-            return Ok(result);
+            return Ok(await _repository.GetByCategory(name));
         }
 
         [Route("[action]/{name}", Name = "GetByName")]
@@ -56,8 +54,7 @@ namespace Catalog.API.Controllers
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<Product>>> GetByName(string name)
         {
-            var result = await _repository.GetByName(name);
-            return Ok(result);
+            return Ok(await _repository.GetByName(name));
         }
 
         [HttpPost]
